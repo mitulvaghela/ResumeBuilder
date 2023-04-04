@@ -4,11 +4,9 @@ import './css/App.css';
 import Menubar from './molecules/MenuBar/Menubar';
 import Resume from './resume/Resume';
 import Form from './form/Form';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import datamodel from './redux/dataModel';
 import { store } from './redux/store';
-import {Route, Switch} from 'react-router-dom';
-import { STORE_TYPES } from './redux/storeTypes';
 // import { store } from './reduce/store';
 export const FormContext = React.createContext("Mitul");
 
@@ -23,23 +21,20 @@ const initialModel = {
 }
 
 function App() {
-  
-  const {formSection} = useSelector( (state) => state[STORE_TYPES.SECTIONNAME]);
+  // const [dataModel,setDataModel] = useState(initialModel);
+  // const [formSection,setFormSection] = useState("");
+ 
  
   return (
-    <>
+    <Provider store={store}>
+    {/* <FormContext.Provider value={{formSection,setFormSection}}> */}
     <Menubar/>
-
     <div className='main'>
-
-      <Route path={`/${formSection}`} >
-            <Form/>
-      </Route> 
-
+      <Form/>
       <Resume/>
     </div>
-    
-    </>
+    {/* </FormContext.Provider> */}
+    </Provider>
   );
 }
 
